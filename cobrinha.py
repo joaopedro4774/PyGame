@@ -51,6 +51,7 @@ if movimento_cobra == LEFT:
         cobra[0] = (cobra[0][0] - 10, cobra[0][1])
     
 screen.fill((0,0,0))
+<<<<<<< HEAD
 screen.blit(fruta, possicao_fruta)
 
 for x in range(0, 600, 10): # Draw vertical lines
@@ -67,3 +68,6 @@ for pos in cobra:
         screen.blit(design_cobra,pos)
 
 pygame.display.update()
+=======
+screen.blit(fruta, possicao_fruta)
+>>>>>>> b7f09c0f465847e0ffe27653dae1e9538ba2374e
