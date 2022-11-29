@@ -1,7 +1,6 @@
 import pygame, random
 from pygame.locals import *
 
-# Helper functions
 def on_grid_random():
     x = random.randint(0,59)
     y = random.randint(0,59)
@@ -15,6 +14,8 @@ UP = 0
 RIGHT = 1
 DOWN = 2
 LEFT = 3
+DOWN=2
+LEFT=3
 
 pygame.init()
 screen = pygame.display.set_mode((600, 600))
@@ -22,7 +23,8 @@ pygame.display.set_caption('Maciel A Cobrinha')
 
 cobra = [(200, 200), (210, 200), (220,200)]
 design_cobra = pygame.Surface((10,10))
-design_cobra.fill((0,0,255)) #Azul
+design_cobra.fill((0,0,255)) 
+design_cobra.fill((0,0,255)) 
 
 possicao_fruta = on_grid_random()
 fruta = pygame.Surface((10,10))
@@ -58,12 +60,10 @@ while not game_over:
         cobra.append((0,0))
         score = score + 1
         
-    # Check if cobra collided with boundaries
     if cobra[0][0] == 600 or cobra[0][1] == 600 or cobra[0][0] < 0 or cobra[0][1] < 0:
         game_over = True
         break
     
-    # Check if the cobra has hit itself
     for i in range(1, len(cobra) - 1):
         if cobra[0][0] == cobra[i][0] and cobra[0][1] == cobra[i][1]:
             game_over = True
@@ -75,7 +75,6 @@ while not game_over:
     for i in range(len(cobra) - 1, 0, -1):
         cobra[i] = (cobra[i-1][0], cobra[i-1][1])
         
-    # Actually make the cobra move.
     if movimento_cobra == UP:
         cobra[0] = (cobra[0][0], cobra[0][1] - 10)
     if movimento_cobra == DOWN:
@@ -85,23 +84,51 @@ while not game_over:
     if movimento_cobra == LEFT:
         cobra[0] = (cobra[0][0] - 10, cobra[0][1])
     
-    screen.fill((0,0,0))
-    screen.blit(fruta, possicao_fruta)
+screen.fill((0,0,0))
+screen.blit(fruta, possicao_fruta)
     
-    for x in range(0, 600, 10): # Draw vertical lines
+for x in range(0, 600, 10):
         pygame.draw.line(screen, (40, 40, 40), (x, 0), (x, 600))
-    for y in range(0, 600, 10): # Draw vertical lines
+for y in range(0, 600, 10):
         pygame.draw.line(screen, (40, 40, 40), (0, y), (600, y))
     
-    score_font = font.render('Pontuação: %s' % (score), True, (255, 255, 255))
-    score_rect = score_font.get_rect()
-    score_rect.topleft = (600 - 120, 10)
-    screen.blit(score_font, score_rect)
+score_font = font.render('Pontuação: %s' % (score), True, (255, 255, 255))
+score_rect = score_font.get_rect()
+score_rect.topleft = (600 - 120, 10)
+screen.blit(score_font, score_rect)
     
-    for pos in cobra:
+for pos in cobra:
+    screen.blit(design_cobra,pos)
+
+pygame.display.update()
+
+if movimento_cobra == UP:
+        cobra[0] = (cobra[0][0], cobra[0][1] - 10)
+if movimento_cobra == DOWN:
+        cobra[0] = (cobra[0][0], cobra[0][1] + 10)
+if movimento_cobra == RIGHT:
+        cobra[0] = (cobra[0][0] + 10, cobra[0][1])
+if movimento_cobra == LEFT:
+        cobra[0] = (cobra[0][0] - 10, cobra[0][1])
+    
+screen.fill((0,0,0))
+screen.blit(fruta, possicao_fruta)
+
+for x in range(0, 600, 10):
+        pygame.draw.line(screen, (40, 40, 40), (x, 0), (x, 600))
+for y in range(0, 600, 10): 
+        pygame.draw.line(screen, (40, 40, 40), (0, y), (600, y))
+    
+score_font = font.render('Pontuação: %s' % (score), True, (255, 255, 255))
+score_rect = score_font.get_rect()
+score_rect.topleft = (600 - 120, 10)
+screen.blit(score_font, score_rect)
+    
+for pos in cobra:
         screen.blit(design_cobra,pos)
 
-    pygame.display.update()
+pygame.display.update()
+
 
 while True:
     game_over_font = pygame.font.Font('freesansbold.ttf', 75)
