@@ -39,3 +39,31 @@ while not game_over:
         if event.type == QUIT:
             pygame.quit()
             exit()
+
+
+if movimento_cobra == UP:
+        cobra[0] = (cobra[0][0], cobra[0][1] - 10)
+if movimento_cobra == DOWN:
+        cobra[0] = (cobra[0][0], cobra[0][1] + 10)
+if movimento_cobra == RIGHT:
+        cobra[0] = (cobra[0][0] + 10, cobra[0][1])
+if movimento_cobra == LEFT:
+        cobra[0] = (cobra[0][0] - 10, cobra[0][1])
+    
+screen.fill((0,0,0))
+screen.blit(fruta, possicao_fruta)
+
+for x in range(0, 600, 10): # Draw vertical lines
+        pygame.draw.line(screen, (40, 40, 40), (x, 0), (x, 600))
+for y in range(0, 600, 10): # Draw vertical lines
+        pygame.draw.line(screen, (40, 40, 40), (0, y), (600, y))
+    
+score_font = font.render('Pontuação: %s' % (score), True, (255, 255, 255))
+score_rect = score_font.get_rect()
+score_rect.topleft = (600 - 120, 10)
+screen.blit(score_font, score_rect)
+    
+for pos in cobra:
+        screen.blit(design_cobra,pos)
+
+pygame.display.update()
