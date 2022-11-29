@@ -21,7 +21,7 @@ pygame.display.set_caption('Maciel A Cobrinha')
 
 cobra = [(200, 200), (210, 200), (220,200)]
 design_cobra = pygame.Surface((10,10))
-design_cobra.fill((0,0,255)) #Azul
+design_cobra.fill((0,0,255)) 
 
 possicao_fruta = on_grid_random()
 fruta = pygame.Surface((10,10))
@@ -52,3 +52,32 @@ if movimento_cobra == LEFT:
     
 screen.fill((0,0,0))
 screen.blit(fruta, possicao_fruta)
+
+for x in range(0, 600, 10): # Draw vertical lines
+        pygame.draw.line(screen, (40, 40, 40), (x, 0), (x, 600))
+for y in range(0, 600, 10): # Draw vertical lines
+        pygame.draw.line(screen, (40, 40, 40), (0, y), (600, y))
+    
+score_font = font.render('Pontuação: %s' % (score), True, (255, 255, 255))
+score_rect = score_font.get_rect()
+score_rect.topleft = (600 - 120, 10)
+screen.blit(score_font, score_rect)
+    
+for pos in cobra:
+        screen.blit(design_cobra,pos)
+
+pygame.display.update()
+
+while True:
+    game_over_font = pygame.font.Font('freesansbold.ttf', 75)
+    game_over_screen = game_over_font.render('Fim de Jogo', True, (255, 255, 255))
+    game_over_rect = game_over_screen.get_rect()
+    game_over_rect.midtop = (600 / 2, 10)
+    screen.blit(game_over_screen, game_over_rect)
+    pygame.display.update()
+    pygame.time.wait(500)
+    while True:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+            exit()
