@@ -38,4 +38,17 @@ while not game_over:
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
-            exit()
+            exit()
+
+
+if movimento_cobra == UP:
+        cobra[0] = (cobra[0][0], cobra[0][1] - 10)
+if movimento_cobra == DOWN:
+        cobra[0] = (cobra[0][0], cobra[0][1] + 10)
+if movimento_cobra == RIGHT:
+        cobra[0] = (cobra[0][0] + 10, cobra[0][1])
+if movimento_cobra == LEFT:
+        cobra[0] = (cobra[0][0] - 10, cobra[0][1])
+    
+screen.fill((0,0,0))
+screen.blit(fruta, possicao_fruta)
